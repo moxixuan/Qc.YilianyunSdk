@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Qc.YilianyunSdk;
 using Qc.YilianyunSdk.SqlServer.Builder;
 
 namespace Qc.YilianyunSdk.SqlServer.Sample

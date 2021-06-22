@@ -21,7 +21,7 @@
 > 需要注意**自有应用**和**开放应用**的区别，它们的保存不一样，自有应用应根据 client_id(应用ID) 保存 accessToken 信息，开放应用应根据 machine_code(打印机终端号) 保存 accessToken 信息
 
 ```cs
-using Qc.YilianyunSdk
+using Qc.YilianyunSdk.SqlServer.Builder;
 public void ConfigureServices(IServiceCollection services)
 {
   //...
@@ -30,7 +30,8 @@ public void ConfigureServices(IServiceCollection services)
       // 应用ID请自行前往 dev.10ss.net 获取
       opt.ClientId = "click_id";
       opt.ClientSecret = "client_secret";
-      opt.YilianyunClientType = YilianyunClientType.自有应用;
+      opt.YilianyunClientType = YilianyunClientType.自有应用
+      opt.SaveConnection = "database=''";
   });
   //...
 }
@@ -103,6 +104,8 @@ public IActionResult OnPostPrintText()
 | SaveTokenDirPath     | string      |    token保存目录 默认 ./AppData |
 | ApiUrl     | string      |    接口地址 默认 https://open-api.10ss.net |
 | Timeout     | int      |    接口超时时间 30s |
+| SaveConnection     | string      |    保存的链接字符串 30s |
+
 
 ## 示例说明
 

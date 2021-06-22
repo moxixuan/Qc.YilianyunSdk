@@ -43,7 +43,14 @@ namespace Qc.YilianyunSdk.SqlServer.Services
         public YilianyunBaseOutputModel<AccessTokenOutputModel> SaveToken(AccessTokenOutputModel input)
         {
             using var context = new YilianyunContext(_yilianyunConfig.SaveConnection);
-            context.Add(input);
+            if(context.AccessTokenOutputModels.AsNoTracking().Any(a => a.Machine_Code == input.Machine_Code))
+            {
+                context.Update(input);
+            }
+            else
+            {
+                context.Add(input);
+            }
             context.SaveChanges();
             _cache.Set($"{GetType().FullName}_{input.Machine_Code}", input);
             return new YilianyunBaseOutputModel<AccessTokenOutputModel>("授权成功", "0") { Body = input };

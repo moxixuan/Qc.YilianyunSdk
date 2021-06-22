@@ -1,7 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>LingFang.Qc.YilianyunSdk.SqlServer</PackageId>
+    <Authors>moxixuan</Authors>
+    <Company>LingFang</Company>
+    <Product></Product>
+    <Description>一个基于 netstandard2.1 构建的易联云 Sdk，零方科技sqlserver扩展</Description>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <PackageProjectUrl>https://github.com/moxixuan/Qc.YilianyunSdk</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

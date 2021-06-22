@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qc.YilianyunSdk.SqlServer\Qc.YilianyunSdk.SqlServer.csproj" />
+    <ProjectReference Include="..\Qc.YilianyunSdk\Qc.YilianyunSdk.csproj" />
+  </ItemGroup>
+
+</Project>

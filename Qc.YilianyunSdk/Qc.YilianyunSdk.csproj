@@ -5,18 +5,19 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>yimo</Authors>
-    <Product>YilianyunSdk</Product>
-    <Description>一个基于 netstandard2.1 构建的易联云 Sdk</Description>
-    <Company>QcCoding</Company>
-    <PackageProjectUrl>https://github.com/QcCoding/Qc.YilianyunSdk</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/QcCoding/Qc.YilianyunSdk</RepositoryUrl>
+    <Product>LingFangYilianyunSdk</Product>
+    <Description>一个基于 netstandard2.1 构建的易联云 Sdk，零方科技扩展</Description>
+    <Company>LingFang</Company>
+    <PackageProjectUrl>https://github.com/moxixuan/Qc.YilianyunSdk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/moxixuan/Qc.YilianyunSdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseUrl>https://github.com/QcCoding/Qc.YilianyunSdk/blob/master/LICENSE</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.7.0</AssemblyVersion>
-    <FileVersion>1.0.7.0</FileVersion>
-    <Version>1.0.7</Version>
+    <AssemblyVersion>1.0.8.0</AssemblyVersion>
+    <FileVersion>1.0.8.0</FileVersion>
+    <Version>1.0.8</Version>
+    <PackageId>LingFang.Qc.YilianyunSdk</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

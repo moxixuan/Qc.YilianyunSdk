@@ -109,6 +109,6 @@ public IActionResult OnPostPrintText()
 
 ## 示例说明
 
-`Qc.YilianyunSdk.Sample` 为示例项目，运行后，获得设备号，新建易联云应用后再`Startup.cs`配置后即可测试
+`Qc.YilianyunSdk.Sample.SqlServer` 为示例项目，运行后，获得设备号，新建易联云应用后再`Startup.cs`配置后即可测试
 
 易联云文档地址: http://doc2.10ss.net/

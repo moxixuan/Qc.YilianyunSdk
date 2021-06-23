@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Qc.YilianyunSdk
 {
@@ -21,5 +22,11 @@ namespace Qc.YilianyunSdk
         /// </summary>
         /// <returns></returns>
         YilianyunBaseOutputModel<AccessTokenOutputModel> SaveToken(AccessTokenOutputModel input);
+        /// <summary>
+        /// 移除token
+        /// </summary>
+        /// <param name="machine_code"></param>
+        /// <returns></returns>
+        Task RemoveAccessToken(string machine_code);
     }
 }

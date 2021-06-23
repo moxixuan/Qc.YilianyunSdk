@@ -291,6 +291,8 @@ namespace Qc.YilianyunSdk
             //授权token
             dicData.Add("access_token", access_token);
             var responseResult = await _httpClient.HttpPostAsync<YilianyunBaseOutputModel>("/printer/deleteprinter", dicData);
+            //删除存储的AccessToken
+            await _yilianyunSdkHook.RemoveAccessToken(machine_code);
             return responseResult;
         }
         #endregion

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Qc.YilianyunSdk.SqlServer.Services
 {
@@ -54,6 +55,18 @@ namespace Qc.YilianyunSdk.SqlServer.Services
             context.SaveChanges();
             _cache.Set($"{GetType().FullName}_{input.Machine_Code}", input);
             return new YilianyunBaseOutputModel<AccessTokenOutputModel>("授权成功", "0") { Body = input };
+        }
+
+        public async Task RemoveAccessToken(string machine_code)
+        {
+            _cache.Remove($"{GetType().FullName}_{machine_code}");
+            using var context = new YilianyunContext(_yilianyunConfig.SaveConnection);
+            var accessTokenOutputModel = await context.AccessTokenOutputModels.FirstOrDefaultAsync(f => f.Machine_Code == machine_code);
+            if (accessTokenOutputModel != null)
+            {
+                context.AccessTokenOutputModels.Remove(accessTokenOutputModel);
+            }
+            await context.SaveChangesAsync();
         }
     }
 }

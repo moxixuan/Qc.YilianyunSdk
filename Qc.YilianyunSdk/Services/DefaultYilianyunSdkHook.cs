@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Qc.YilianyunSdk
 {
@@ -66,6 +67,11 @@ namespace Qc.YilianyunSdk
             //保存
             System.IO.File.WriteAllText(savePath, JsonHelper.Serialize(input));
             return new YilianyunBaseOutputModel<AccessTokenOutputModel>("授权成功", "0") { Body = input };
+        }
+
+        public Task RemoveAccessToken(string machine_code)
+        {
+            return Task.CompletedTask;
         }
     }
 }

@@ -1,27 +1,27 @@
 # 易联云打印机 SDK
 
-`Qc.YilianyunSdk` 基于 `.NET Standard 2.0 ` 构建  
+`Qc.YilianyunSdk` 基于 `.NET Standard 2.1 ` 构建  
 `Qc.YilianyunSdk.Sample` 包含基础授权及打印调用示例，授权及打印接口测试，其他接口不常用只是对文档接口做了对应封装,使用前请测试好接口再使用
 
 ## 使用
 
 ### 一.安装程序包
 
-[![Nuget](https://img.shields.io/nuget/v/Qc.YilianyunSdk)](https://www.nuget.org/packages/Qc.YilianyunSdk/)
+[![Nuget](https://img.shields.io/nuget/v/LingFang.Qc.YilianyunSdk.SqlServer)](https://www.nuget.org/packages/LingFang.Qc.YilianyunSdk.SqlServer/)
 
 - dotnet cli  
-  `dotnet add package Qc.YilianyunSdk`
+  `dotnet add package LingFang.Qc.YilianyunSdk.SqlServer`
 - 包管理器  
-  `Install-Package Install-Package Qc.YilianyunSdk`
+  `Install-Package Install-Package LingFang.Qc.YilianyunSdk.SqlServer`
 
 ### 二.添加配置
 
-> 如需实现自定义存储 AccessToken，动态获取应用配置，可自行实现接口 `IYilianyunSdkHook`  
-> 默认提供 `DefaultYilianyunSdkHook`，存储 AccessToken 等信息到指定目录
+> 如需实现其他自定义存储 AccessToken，动态获取应用配置，可自行实现接口 `IYilianyunSdkHook`  
+> 默认提供 `SqlserverYilianyunSdkHook`，存储 AccessToken 等信息到指定目录
 > 需要注意**自有应用**和**开放应用**的区别，它们的保存不一样，自有应用应根据 client_id(应用ID) 保存 accessToken 信息，开放应用应根据 machine_code(打印机终端号) 保存 accessToken 信息
 
 ```cs
-using Qc.YilianyunSdk
+using Qc.YilianyunSdk.SqlServer.Builder;
 public void ConfigureServices(IServiceCollection services)
 {
   //...
@@ -30,7 +30,8 @@ public void ConfigureServices(IServiceCollection services)
       // 应用ID请自行前往 dev.10ss.net 获取
       opt.ClientId = "click_id";
       opt.ClientSecret = "client_secret";
-      opt.YilianyunClientType = YilianyunClientType.自有应用;
+      opt.YilianyunClientType = YilianyunClientType.自有应用
+      opt.SaveConnection = "database=''";
   });
   //...
 }
@@ -103,9 +104,11 @@ public IActionResult OnPostPrintText()
 | SaveTokenDirPath     | string      |    token保存目录 默认 ./AppData |
 | ApiUrl     | string      |    接口地址 默认 https://open-api.10ss.net |
 | Timeout     | int      |    接口超时时间 30s |
+| SaveConnection     | string      |    保存的链接字符串 30s |
+
 
 ## 示例说明
 
-`Qc.YilianyunSdk.Sample` 为示例项目，运行后，获得设备号，新建易联云应用后再`Startup.cs`配置后即可测试
+`Qc.YilianyunSdk.Sample.SqlServer` 为示例项目，运行后，获得设备号，新建易联云应用后再`Startup.cs`配置后即可测试
 
 易联云文档地址: http://doc2.10ss.net/

@@ -33,18 +33,23 @@ namespace Qc.YilianyunSdk.SqlServer.Services
 
         public AccessTokenOutputModel GetAccessToken(string machine_code)
         {
-             return _cache.GetOrCreate($"{GetType().FullName}_{machine_code}", entry =>
+            return _yilianyunConfig.YilianyunClientType switch
             {
-                entry.SlidingExpiration = _yilianyunConfig.TokenSlidingExpiration;
-                using var context = new YilianyunContext(_yilianyunConfig.SaveConnection);
-                return context.AccessTokenOutputModels.AsNoTracking().FirstOrDefault(f => f.Machine_Code == machine_code);
-            });
+                YilianyunClientType.开放应用 => throw new NotImplementedException(),
+                YilianyunClientType.自有应用 => _cache.GetOrCreate($"{GetType().FullName}_{_yilianyunConfig.ClientId}", entry =>
+                {
+                    entry.SlidingExpiration = _yilianyunConfig.TokenSlidingExpiration;
+                    using var context = new YilianyunContext(_yilianyunConfig.SaveConnection);
+                    return context.AccessTokenOutputModels.AsNoTracking().FirstOrDefault(f => f.Machine_Code == _yilianyunConfig.ClientId);
+                }),
+                _ => throw new NotImplementedException(),
+            };
         }
 
         public YilianyunBaseOutputModel<AccessTokenOutputModel> SaveToken(AccessTokenOutputModel input)
         {
             using var context = new YilianyunContext(_yilianyunConfig.SaveConnection);
-            if(context.AccessTokenOutputModels.AsNoTracking().Any(a => a.Machine_Code == input.Machine_Code))
+            if(context.AccessTokenOutputModels.AsNoTracking().Any(a => a.Machine_Code == _yilianyunConfig.ClientId))
             {
                 context.Update(input);
             }
@@ -53,7 +58,7 @@ namespace Qc.YilianyunSdk.SqlServer.Services
                 context.Add(input);
             }
             context.SaveChanges();
-            _cache.Set($"{GetType().FullName}_{input.Machine_Code}", input);
+            //_cache.Set($"{GetType().FullName}_{_yilianyunConfig.ClientId}", input, (TimeSpan)_yilianyunConfig.TokenSlidingExpiration);
             return new YilianyunBaseOutputModel<AccessTokenOutputModel>("授权成功", "0") { Body = input };
         }
 

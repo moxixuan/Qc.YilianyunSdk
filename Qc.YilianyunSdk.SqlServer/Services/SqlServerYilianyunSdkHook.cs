@@ -48,8 +48,15 @@ namespace Qc.YilianyunSdk.SqlServer.Services
 
         public YilianyunBaseOutputModel<AccessTokenOutputModel> SaveToken(AccessTokenOutputModel input)
         {
+            _ = _yilianyunConfig.YilianyunClientType switch
+            {
+                YilianyunClientType.开放应用 => throw new NotImplementedException(),
+                YilianyunClientType.自有应用 => input.Machine_Code = _yilianyunConfig.ClientId,
+                _ => throw new NotImplementedException(),
+            };
+
             using var context = new YilianyunContext(_yilianyunConfig.SaveConnection);
-            if(context.AccessTokenOutputModels.AsNoTracking().Any(a => a.Machine_Code == _yilianyunConfig.ClientId))
+            if(context.AccessTokenOutputModels.AsNoTracking().Any(a => a.Machine_Code == input.Machine_Code))
             {
                 context.Update(input);
             }
@@ -58,20 +65,19 @@ namespace Qc.YilianyunSdk.SqlServer.Services
                 context.Add(input);
             }
             context.SaveChanges();
-            //_cache.Set($"{GetType().FullName}_{_yilianyunConfig.ClientId}", input, (TimeSpan)_yilianyunConfig.TokenSlidingExpiration);
             return new YilianyunBaseOutputModel<AccessTokenOutputModel>("授权成功", "0") { Body = input };
         }
 
-        public async Task RemoveAccessToken(string machine_code)
-        {
-            _cache.Remove($"{GetType().FullName}_{machine_code}");
-            using var context = new YilianyunContext(_yilianyunConfig.SaveConnection);
-            var accessTokenOutputModel = await context.AccessTokenOutputModels.FirstOrDefaultAsync(f => f.Machine_Code == machine_code);
-            if (accessTokenOutputModel != null)
-            {
-                context.AccessTokenOutputModels.Remove(accessTokenOutputModel);
-            }
-            await context.SaveChangesAsync();
-        }
+        //public async Task RemoveAccessToken(string machine_code)
+        //{
+        //    _cache.Remove($"{GetType().FullName}_{machine_code}");
+        //    using var context = new YilianyunContext(_yilianyunConfig.SaveConnection);
+        //    var accessTokenOutputModel = await context.AccessTokenOutputModels.FirstOrDefaultAsync(f => f.Machine_Code == machine_code);
+        //    if (accessTokenOutputModel != null)
+        //    {
+        //        context.AccessTokenOutputModels.Remove(accessTokenOutputModel);
+        //    }
+        //    await context.SaveChangesAsync();
+        //}
     }
 }

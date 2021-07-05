@@ -22,11 +22,11 @@ namespace Qc.YilianyunSdk
         /// </summary>
         /// <returns></returns>
         YilianyunBaseOutputModel<AccessTokenOutputModel> SaveToken(AccessTokenOutputModel input);
-        /// <summary>
-        /// 移除token
-        /// </summary>
-        /// <param name="machine_code"></param>
-        /// <returns></returns>
-        Task RemoveAccessToken(string machine_code);
+        ///// <summary>
+        ///// 移除token
+        ///// </summary>
+        ///// <param name="machine_code"></param>
+        ///// <returns></returns>
+        //Task RemoveAccessToken(string machine_code);
     }
 }

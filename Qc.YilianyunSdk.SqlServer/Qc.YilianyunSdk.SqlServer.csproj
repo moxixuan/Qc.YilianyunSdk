@@ -8,10 +8,10 @@
     <Company>LingFang</Company>
     <Product></Product>
     <Description>一个基于 netstandard2.1 构建的易联云 Sdk，零方科技sqlserver扩展</Description>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
-    <FileVersion>1.0.0.3</FileVersion>
+    <AssemblyVersion>1.0.5.0</AssemblyVersion>
+    <FileVersion>1.0.5.0</FileVersion>
     <PackageProjectUrl>https://github.com/moxixuan/Qc.YilianyunSdk</PackageProjectUrl>
-    <Version>1.0.3</Version>
+    <Version>1.0.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
